@@ -3,7 +3,7 @@
 library presentation.providers.mistake_providers;
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_state_notifier/riverpod_state_notifier.dart';
+import 'state_notifier_compat.dart';
 
 import '../../domain/entities/entities.dart';
 import 'repository_providers.dart';
