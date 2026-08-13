@@ -55,8 +55,8 @@ class GradingEngineImpl implements GradingEngine {
     final rawScore = resultQuestions.fold<double>(0, (a, q) => a + q.score);
     final percentage = (rawScore / questions.length) * 100;
     final answered = correct + incorrect;
-    final accuracy = questions.isEmpty ? 0 : correct / questions.length;
-    final answeredAccuracy = answered == 0 ? 0 : correct / answered;
+    final accuracy = questions.isEmpty ? 0.0 : correct / questions.length;
+    final answeredAccuracy = answered == 0 ? 0.0 : correct / answered;
     final avgTime = totalTime ~/ (questions.isEmpty ? 1 : questions.length);
 
     return ExamResult(
