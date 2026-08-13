@@ -6,7 +6,7 @@
 /// only persists the metadata row so the UI can list backups.
 library data.repositories.implementations.backup_repository_impl;
 
-import '../../../data/database/app_database.dart';
+import '../../../data/database/app_database.dart' hide BackupMetadata;
 import '../../../data/database/daos/daos.dart';
 import '../../../domain/entities/entities.dart';
 import '../../../domain/repositories/repositories.dart';
