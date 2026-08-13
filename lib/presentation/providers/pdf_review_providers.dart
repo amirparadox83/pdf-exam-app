@@ -62,7 +62,7 @@ class PdfReviewSessionNotifier extends StateNotifier<PdfReviewSession> {
 }
 
 final pdfReviewSessionProvider =
-    StateNotifierProvider<PdfReviewSessionNotifier, PdfReviewSession>(
+    stateNotifierProvider<PdfReviewSessionNotifier, PdfReviewSession>(
   (ref) => PdfReviewSessionNotifier(),
 );
 
