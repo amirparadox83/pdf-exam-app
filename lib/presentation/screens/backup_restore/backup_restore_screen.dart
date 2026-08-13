@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:file_picker/file_picker.dart';
 
 import '../../providers/app_providers.dart';
+import '../../../domain/entities/entities.dart';
 
 class BackupRestoreScreen extends ConsumerWidget {
   const BackupRestoreScreen({super.key});
