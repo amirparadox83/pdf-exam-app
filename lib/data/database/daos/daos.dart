@@ -97,12 +97,11 @@ class TagsDao {
   }
 
   Future<List<Tag>> getTagsForQuestion(String questionId) async {
-    final rows = await (db.select(db.tags).join([
+    final query = db.select(db.tags).join([
       innerJoin(db.questionTags, db.questionTags.tagId.equalsExp(db.tags.id)),
     ])
-      ..where(db.questionTags.questionId.equals(questionId))
-      ..orderBy([(t) => OrderingTerm.asc(t.name)]))
-    .get();
+      ..where(db.questionTags.questionId.equals(questionId));
+    final rows = await query.get();
     return rows.map((row) => row.readTable(db.tags)).toList();
   }
 }
