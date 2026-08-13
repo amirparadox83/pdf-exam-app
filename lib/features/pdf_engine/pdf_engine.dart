@@ -205,7 +205,7 @@ class _PdfrxHandle implements PdfDocumentHandle {
     final pageImage = await page.render(
       // scale: 1.0 = 72 DPI. Multiply by (targetDpi / 72) for higher DPI.
       // For on-screen review, 1.0–2.0 is enough; for archival, 2.0–3.0.
-      scaleFactor: scale,
+      scale: scale,
       // Render with transparency disabled — white background — to match
       // how PDFs look on paper. Without this, transparent PDF backgrounds
       // show as black in the PNG.
@@ -246,7 +246,7 @@ class _PdfrxHandle implements PdfDocumentHandle {
     final spans = <PdfTextSpan>[];
 
     if (pageText != null) {
-      for (final fragment in pageText.spans) {
+      for (final fragment in pageText.fragments) {
         final text = fragment.text;
         if (text.isEmpty) continue;
         final rect = fragment.bounds;
