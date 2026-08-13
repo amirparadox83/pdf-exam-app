@@ -11,7 +11,7 @@ import 'package:drift/drift.dart';
 // === Tables ===
 
 class Subjects extends Table {
-  TextColumn get id => text().clientDefault(() => _uuid())();
+  TextColumn get id => text().clientDefault(() => "id-${DateTime.now().microsecondsSinceEpoch.toRadixString(36)}-${_tablesCounter++}")();
   TextColumn get name => text().withLength(min: 1, max: 200)();
   TextColumn get color => text().nullable()();
   IntColumn get questionCount => integer().withDefault(const Constant(0))();
@@ -23,7 +23,7 @@ class Subjects extends Table {
 }
 
 class Topics extends Table {
-  TextColumn get id => text().clientDefault(() => _uuid())();
+  TextColumn get id => text().clientDefault(() => "id-${DateTime.now().microsecondsSinceEpoch.toRadixString(36)}-${_tablesCounter++}")();
   TextColumn get subjectId => text().customConstraint('REFERENCES subjects(id) ON DELETE CASCADE')();
   TextColumn get name => text().withLength(min: 1, max: 200)();
   IntColumn get questionCount => integer().withDefault(const Constant(0))();
@@ -35,7 +35,7 @@ class Topics extends Table {
 }
 
 class Tags extends Table {
-  TextColumn get id => text().clientDefault(() => _uuid())();
+  TextColumn get id => text().clientDefault(() => "id-${DateTime.now().microsecondsSinceEpoch.toRadixString(36)}-${_tablesCounter++}")();
   TextColumn get name => text().withLength(min: 1, max: 100)();
   TextColumn get color => text().nullable()();
   IntColumn get questionCount => integer().withDefault(const Constant(0))();
@@ -46,7 +46,7 @@ class Tags extends Table {
 }
 
 class PdfSources extends Table {
-  TextColumn get id => text().clientDefault(() => _uuid())();
+  TextColumn get id => text().clientDefault(() => "id-${DateTime.now().microsecondsSinceEpoch.toRadixString(36)}-${_tablesCounter++}")();
   TextColumn get originalFileName => text()();
   TextColumn get storedFilePath => text()();
   IntColumn get pageCount => integer().withDefault(const Constant(0))();
@@ -62,7 +62,7 @@ class PdfSources extends Table {
 }
 
 class PdfPages extends Table {
-  TextColumn get id => text().clientDefault(() => _uuid())();
+  TextColumn get id => text().clientDefault(() => "id-${DateTime.now().microsecondsSinceEpoch.toRadixString(36)}-${_tablesCounter++}")();
   TextColumn get pdfId => text().customConstraint('REFERENCES pdf_sources(id) ON DELETE CASCADE')();
   IntColumn get pageNumber => integer()();
   RealColumn get width => real()();
@@ -75,7 +75,7 @@ class PdfPages extends Table {
 }
 
 class Questions extends Table {
-  TextColumn get id => text().clientDefault(() => _uuid())();
+  TextColumn get id => text().clientDefault(() => "id-${DateTime.now().microsecondsSinceEpoch.toRadixString(36)}-${_tablesCounter++}")();
   TextColumn get pdfId => text().nullable().customConstraint('REFERENCES pdf_sources(id) ON DELETE SET NULL')();
   IntColumn get sourcePageNumber => integer().nullable()();
   TextColumn get body => text()();
@@ -101,7 +101,7 @@ class Questions extends Table {
 }
 
 class QuestionOptions extends Table {
-  TextColumn get id => text().clientDefault(() => _uuid())();
+  TextColumn get id => text().clientDefault(() => "id-${DateTime.now().microsecondsSinceEpoch.toRadixString(36)}-${_tablesCounter++}")();
   TextColumn get questionId => text().customConstraint('REFERENCES questions(id) ON DELETE CASCADE')();
   TextColumn get label => text()();
   TextColumn get optionText => text()();
@@ -121,7 +121,7 @@ class QuestionTags extends Table {
 }
 
 class Exams extends Table {
-  TextColumn get id => text().clientDefault(() => _uuid())();
+  TextColumn get id => text().clientDefault(() => "id-${DateTime.now().microsecondsSinceEpoch.toRadixString(36)}-${_tablesCounter++}")();
   TextColumn get name => text()();
   TextColumn get questionIdsJson => text().withDefault(const Constant('[]'))();
   IntColumn get timeLimitSeconds => integer()();
@@ -155,7 +155,7 @@ class ExamAnswers extends Table {
 }
 
 class ExamResults extends Table {
-  TextColumn get id => text().clientDefault(() => _uuid())();
+  TextColumn get id => text().clientDefault(() => "id-${DateTime.now().microsecondsSinceEpoch.toRadixString(36)}-${_tablesCounter++}")();
   TextColumn get examId => text().customConstraint('REFERENCES exams(id) ON DELETE CASCADE')();
   IntColumn get totalQuestions => integer()();
   IntColumn get correctCount => integer()();
@@ -175,7 +175,7 @@ class ExamResults extends Table {
 }
 
 class Mistakes extends Table {
-  TextColumn get id => text().clientDefault(() => _uuid())();
+  TextColumn get id => text().clientDefault(() => "id-${DateTime.now().microsecondsSinceEpoch.toRadixString(36)}-${_tablesCounter++}")();
   TextColumn get questionId => text().customConstraint('REFERENCES questions(id) ON DELETE CASCADE')();
   TextColumn get examResultId => text().nullable()();
   TextColumn get reason => text().nullable()();
@@ -191,7 +191,7 @@ class Mistakes extends Table {
 }
 
 class ReviewSchedules extends Table {
-  TextColumn get id => text().clientDefault(() => _uuid())();
+  TextColumn get id => text().clientDefault(() => "id-${DateTime.now().microsecondsSinceEpoch.toRadixString(36)}-${_tablesCounter++}")();
   TextColumn get questionId => text().customConstraint('REFERENCES questions(id) ON DELETE CASCADE')();
   RealColumn get easeFactor => real().withDefault(const Constant(2.5))();
   IntColumn get intervalDays => integer().withDefault(const Constant(0))();
@@ -207,7 +207,7 @@ class ReviewSchedules extends Table {
 }
 
 class Notes extends Table {
-  TextColumn get id => text().clientDefault(() => _uuid())();
+  TextColumn get id => text().clientDefault(() => "id-${DateTime.now().microsecondsSinceEpoch.toRadixString(36)}-${_tablesCounter++}")();
   TextColumn get questionId => text().customConstraint('REFERENCES questions(id) ON DELETE CASCADE')();
   TextColumn get content => text()();
   DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
@@ -218,7 +218,7 @@ class Notes extends Table {
 }
 
 class BackupMetadataTable extends Table {
-  TextColumn get id => text().clientDefault(() => _uuid())();
+  TextColumn get id => text().clientDefault(() => "id-${DateTime.now().microsecondsSinceEpoch.toRadixString(36)}-${_tablesCounter++}")();
   TextColumn get filePath => text()();
   IntColumn get fileSizeBytes => integer()();
   TextColumn get checksum => text()();
@@ -244,6 +244,8 @@ class QuestionsFts extends Table {
   @override
   String get tableName => 'questions_fts';
 }
+
+int _tablesCounter = 0;
 
 String _uuid() {
   // Simple UUID v4 generator (avoids extra dependency in this stub).
