@@ -83,7 +83,7 @@ dev_dependencies:
   freezed: ^2.5.7
   json_serializable: ^6.8.0
   mockito: ^5.4.4
-  build_verify: ^3.1.0
+  # build_verify: ^3.1.0  # removed — causes dependency resolution conflicts with flutter_test SDK
 
   # Test-only — for mocking path_provider in SettingsService / BackupService tests.
   path_provider_platform_interface: ^2.1.2
