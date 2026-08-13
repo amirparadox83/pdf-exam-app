@@ -10,16 +10,7 @@ import '../../data/file_storage/file_storage_service.dart';
 import '../../services/service_container.dart';
 
 /// Theme mode (system/light/dark)
-final themeModeProvider = NotifierProvider<ThemeModeNotifier, ThemeMode>(
-  ThemeModeNotifier.new,
-);
-
-class ThemeModeNotifier extends Notifier<ThemeMode> {
-  @override
-  ThemeMode build() => ThemeMode.system;
-
-  void set(ThemeMode mode) => state = mode;
-}
+final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.system);
 
 /// Database singleton
 final appDatabaseProvider = Provider<AppDatabase>((ref) {
