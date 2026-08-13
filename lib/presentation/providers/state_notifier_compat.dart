@@ -7,33 +7,34 @@ export 'package:state_notifier/state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart' as sn;
 
-/// Creates a StateNotifierProvider-like provider using NotifierProvider.
+/// Creates a [NotifierProvider] that wraps a [StateNotifier].
+/// This replaces StateNotifierProvider from riverpod 2.x.
 ///
-/// Usage: final myProvider = stateNotifierProvider<MyNotifier, MyState>(MyNotifier.new);
-StateNotifierProvider<NotifierT extends sn.StateNotifier<StateT>, StateT>
+/// Usage:
+///   final myProvider = stateNotifierProvider<MyNotifier, MyState>(MyNotifier.new);
+NotifierProvider<NotifierT, StateT>
     stateNotifierProvider<NotifierT extends sn.StateNotifier<StateT>, StateT>(
   NotifierT Function() create, {
   String? name,
-  Iterable<ProviderFamily>? dependencies,
 }) {
   return NotifierProvider<NotifierT, StateT>(
     create,
     name: name,
-    dependencies: dependencies,
   );
 }
 
-/// Creates a StateProvider-like provider.
+/// A simple state holder provider, replacing StateProvider.
+/// Returns a [NotifierProvider] backed by a simple [StateNotifier].
 ///
-/// Usage: final myProvider = stateProvider<MyState>((ref) => initialValue);
-Provider<StateT> stateProvider<StateT>(
-  StateT Function(Ref ref) create, {
+/// Usage:
+///   final themeProvider = stateProvider<ThemeMode>((ref) => ThemeMode.system);
+NotifierProvider<sn.StateNotifier<StateT>, StateT>
+    stateProvider<StateT>(
+  StateT Function() initialValue, {
   String? name,
-  Iterable<ProviderFamily>? dependencies,
 }) {
-  return Provider<StateT>(
-    create,
+  return NotifierProvider<sn.StateNotifier<StateT>, StateT>(
+    () => sn.StateNotifier(initialValue()),
     name: name,
-    dependencies: dependencies,
   );
 }
