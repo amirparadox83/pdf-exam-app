@@ -40,7 +40,7 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
   }
 
   void _init() {
-    final session = ref.read(examSessionProvider);
+    final ExamSession session = ref.read(examSessionProvider);
     if (session.exam.id.isEmpty) {
       // Session not loaded — shouldn't normally happen because
       // ExamPreparationScreen sets it before navigating here.
@@ -76,7 +76,7 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
   }
 
   Future<void> _selectOption(String optionId) async {
-    final session = ref.read(examSessionProvider);
+    final ExamSession session = ref.read(examSessionProvider);
     final questionId = session.questions[_currentQuestion].id;
     final container = ref.read(serviceContainerProvider);
 
@@ -96,7 +96,7 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
   }
 
   Future<void> _toggleBookmark() async {
-    final session = ref.read(examSessionProvider);
+    final ExamSession session = ref.read(examSessionProvider);
     final questionId = session.questions[_currentQuestion].id;
     final container = ref.read(serviceContainerProvider);
     final existing = session.answersById[questionId];
@@ -114,7 +114,7 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
   }
 
   void _next() {
-    final session = ref.read(examSessionProvider);
+    final ExamSession session = ref.read(examSessionProvider);
     if (_currentQuestion < session.questions.length - 1) {
       setState(() => _currentQuestion++);
     } else {
@@ -144,7 +144,7 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final session = ref.watch(examSessionProvider);
+    final ExamSession session = ref.watch(examSessionProvider);
 
     if (!_initialized || session.questions.isEmpty) {
       return Scaffold(

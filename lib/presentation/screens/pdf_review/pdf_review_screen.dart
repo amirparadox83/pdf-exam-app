@@ -24,7 +24,7 @@ class PdfReviewScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final session = ref.watch(pdfReviewSessionProvider);
+    final PdfReviewSession session = ref.watch(pdfReviewSessionProvider);
     final summary = ref.watch(pdfReviewSummaryProvider);
 
     return Scaffold(
@@ -125,7 +125,7 @@ class PdfReviewScreen extends ConsumerWidget {
   /// then navigate to the question bank.
   Future<void> _persistAllAndContinue(
       BuildContext context, WidgetRef ref) async {
-    final session = ref.read(pdfReviewSessionProvider);
+    final PdfReviewSession session = ref.read(pdfReviewSessionProvider);
     final container = ref.read(serviceContainerProvider);
     final messenger = ScaffoldMessenger.of(context);
 

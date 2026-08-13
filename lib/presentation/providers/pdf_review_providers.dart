@@ -68,7 +68,7 @@ final pdfReviewSessionProvider =
 /// Derived counts for the summary header.
 final pdfReviewSummaryProvider = Provider<PdfReviewSummary>(
   (ref) {
-    final session = ref.watch(pdfReviewSessionProvider);
+    final PdfReviewSession session = ref.watch(pdfReviewSessionProvider);
     var valid = 0;
     var suspicious = 0;
     var invalid = 0;

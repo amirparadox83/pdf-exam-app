@@ -19,7 +19,7 @@ class SubmitConfirmationScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final session = ref.watch(examSessionProvider);
+    final ExamSession session = ref.watch(examSessionProvider);
 
     // Compute real stats from the session.
     int answered = 0;
@@ -109,7 +109,7 @@ class SubmitConfirmationScreen extends ConsumerWidget {
 
   Future<void> _submitAndContinue(
       BuildContext context, WidgetRef ref) async {
-    final session = ref.read(examSessionProvider);
+    final ExamSession session = ref.read(examSessionProvider);
     final container = ref.read(serviceContainerProvider);
     final messenger = ScaffoldMessenger.of(context);
 

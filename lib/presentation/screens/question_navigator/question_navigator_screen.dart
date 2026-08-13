@@ -15,7 +15,7 @@ class QuestionNavigatorScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final session = ref.watch(examSessionProvider);
+    final ExamSession session = ref.watch(examSessionProvider);
     final questions = session.questions;
     if (questions.isEmpty) {
       return Scaffold(

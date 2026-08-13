@@ -5,7 +5,7 @@ library presentation.providers.exam_providers;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/entities/entities.dart';
-import 'app_providers.dart';
+import 'core_providers.dart';
 
 /// Active exam session — held in memory between ExamPreparation and SubmitConfirmation.
 /// Set by ExamPreparationScreen.startExam, read by ExamScreen + SubmitConfirmationScreen.
