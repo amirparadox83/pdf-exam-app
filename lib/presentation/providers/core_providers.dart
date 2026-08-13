@@ -4,6 +4,7 @@ library presentation.providers.core_providers;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_state_notifier/riverpod_state_notifier.dart';
 
 import '../../data/database/app_database.dart';
 import '../../data/file_storage/file_storage_service.dart';
