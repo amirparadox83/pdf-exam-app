@@ -73,7 +73,7 @@ class ExamSessionNotifier extends StateNotifier<ExamSession> {
 }
 
 final examSessionProvider =
-    StateNotifierProvider<ExamSessionNotifier, ExamSession>(
+    stateNotifierProvider<ExamSessionNotifier, ExamSession>(
   (ref) => ExamSessionNotifier(ref),
 );
 
