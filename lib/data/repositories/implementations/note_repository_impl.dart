@@ -32,7 +32,7 @@ class NoteRepositoryImpl implements NoteRepository {
   }
 
   @override
-  Future<void> deleteById(String id) async {
+  Future<void> delete(String id) async {
     await _dao.deleteById(id);
   }
 }
