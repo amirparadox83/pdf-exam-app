@@ -2,7 +2,7 @@
 /// Stage 09 — Local Database
 library data.repositories.implementations.topic_repository_impl;
 
-import '../../../data/database/app_database.dart';
+import '../../../data/database/app_database.dart' hide Topic;
 import '../../../data/database/daos/daos.dart';
 import '../../../domain/entities/entities.dart';
 import '../../../domain/repositories/repositories.dart';
