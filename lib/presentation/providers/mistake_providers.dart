@@ -30,7 +30,7 @@ final mistakeListProvider = FutureProvider<List<Mistake>>(
 
 /// Optional reason filter.
 final mistakeReasonFilterProvider =
-    stateProvider<MistakeReason?>((ref) => null);
+    stateProvider<MistakeReason?>(() => null);
 
 /// Filtered list (applies reason filter on top of `mistakeListProvider`).
 final filteredMistakeListProvider = Provider<List<Mistake>>((ref) {
