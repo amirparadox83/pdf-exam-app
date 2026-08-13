@@ -31,7 +31,7 @@ class ExamRepositoryImpl implements ExamRepository {
   }
 
   @override
-  Future<String> create(Exam exam) =>
+  Future<String> insert(Exam exam) =>
       _examsDao.insertOne(examToCompanion(exam, newRecord: true));
 
   @override
@@ -40,7 +40,7 @@ class ExamRepositoryImpl implements ExamRepository {
   }
 
   @override
-  Future<void> deleteById(String id) async {
+  Future<void> delete(String id) async {
     await _examsDao.deleteById(id);
   }
 
@@ -49,10 +49,13 @@ class ExamRepositoryImpl implements ExamRepository {
       _answersDao.getByExam(examId).then((rows) => rows.map(examAnswerFromRow).toList());
 
   @override
-  Future<void> upsertAnswer(ExamAnswer answer) =>
+  Future<void> saveAnswer(ExamAnswer answer) =>
       _answersDao.upsert(examAnswerToCompanion(answer));
 
   @override
+  Future<ExamAnswer?> getAnswer(String examId, String questionId) =>
+      _answersDao.get(examId, questionId).then((row) => row == null ? null : examAnswerFromRow(row));
+
   Future<void> clearAnswers(String examId) =>
       _answersDao.clearByExam(examId);
 }
