@@ -4,7 +4,7 @@ library data.repositories.implementations.mistake_repository_impl;
 
 import 'package:drift/drift.dart' show Value;
 
-import '../../../data/database/app_database.dart';
+import '../../../data/database/app_database.dart' hide Mistake;
 import '../../../data/database/daos/daos.dart';
 import '../../../domain/entities/entities.dart';
 import '../../../domain/repositories/repositories.dart';
@@ -31,7 +31,7 @@ class MistakeRepositoryImpl implements MistakeRepository {
   }
 
   @override
-  Future<String> insert(Mistake mistake) =>
+  Future<String> create(Mistake mistake) =>
       _dao.insertOne(mistakeToCompanion(mistake, newRecord: true));
 
   @override
@@ -40,20 +40,7 @@ class MistakeRepositoryImpl implements MistakeRepository {
   }
 
   @override
-  Future<void> delete(String id) => _dao.deleteById(id);
-
-  @override
-  Future<void> markCorrectStreak(String questionId, bool correct) async {
-    final existing = await _dao.getByQuestion(questionId);
-    final now = DateTime.now();
-    if (existing == null) return;
-    final newStreak = correct ? existing.correctStreak + 1 : 0;
-    await _dao.updateOne(
-      MistakesCompanion(
-        id: Value(existing.id),
-        correctStreak: Value(newStreak),
-        updatedAt: Value(now),
-      ),
-    );
+  Future<void> deleteById(String id) async {
+    await _dao.deleteById(id);
   }
 }
