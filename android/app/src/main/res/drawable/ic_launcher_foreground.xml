@@ -1,0 +1,22 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- White document, centered in 72dp safe zone (offset 18,18 → 90,90) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M40,30 L60,30 L72,42 L72,78 L40,78 Z"/>
+    <path
+        android:fillColor="#FCD34D"
+        android:pathData="M60,30 L60,42 L72,42 Z"/>
+    <path
+        android:fillColor="#0F766E"
+        android:pathData="M46,52 L66,52 L66,56 L46,56 Z"/>
+    <path
+        android:fillColor="#0F766E"
+        android:pathData="M46,60 L66,60 L66,64 L46,64 Z"/>
+    <path
+        android:fillColor="#0F766E"
+        android:pathData="M46,68 L58,68 L58,72 L46,72 Z"/>
+</vector>
