@@ -280,7 +280,7 @@ db.QuestionOptionsCompanion optionToCompanion(
       id: newRecord ? Value(entity.id) : Value.absent(),
       questionId: Value(questionId),
       label: Value(entity.label),
-      text: Value(entity.text),
+      optionText: Value(entity.text),
       order: Value(entity.order),
       regionJson: Value(_regionToJson(entity.region)),
     );
@@ -288,7 +288,7 @@ db.QuestionOptionsCompanion optionToCompanion(
 QuestionOption optionFromRow(db.QuestionOption row) => QuestionOption(
       id: row.id,
       label: row.label,
-      text: row.text,
+      text: row.optionText,
       order: row.order,
       region: _regionFromJson(row.regionJson),
     );

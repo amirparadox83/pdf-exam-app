@@ -104,7 +104,7 @@ class QuestionOptions extends Table {
   TextColumn get id => text().clientDefault(() => _uuid())();
   TextColumn get questionId => text().customConstraint('REFERENCES questions(id) ON DELETE CASCADE')();
   TextColumn get label => text()();
-  TextColumn get text => text()();
+  TextColumn get optionText => text()();
   IntColumn get order => integer().withDefault(const Constant(0))();
   TextColumn get regionJson => text().nullable()();
 
