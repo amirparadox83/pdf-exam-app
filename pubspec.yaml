@@ -67,7 +67,6 @@ dependencies:
   intl: ^0.20.0
   logger: ^2.4.0
   state_notifier: ^1.0.0
-  riverpod_state_notifier: ^1.0.0
   freezed_annotation: ^3.1.0
   json_annotation: ^4.9.0
 
