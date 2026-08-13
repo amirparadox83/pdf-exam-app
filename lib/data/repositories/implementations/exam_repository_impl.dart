@@ -2,7 +2,7 @@
 /// Stage 09 — Local Database
 library data.repositories.implementations.exam_repository_impl;
 
-import '../../../data/database/app_database.dart';
+import '../../../data/database/app_database.dart' hide Exam, ExamAnswer, ExamResult;
 import '../../../data/database/daos/daos.dart';
 import '../../../domain/entities/entities.dart';
 import '../../../domain/repositories/repositories.dart';
@@ -31,7 +31,7 @@ class ExamRepositoryImpl implements ExamRepository {
   }
 
   @override
-  Future<String> insert(Exam exam) =>
+  Future<String> create(Exam exam) =>
       _examsDao.insertOne(examToCompanion(exam, newRecord: true));
 
   @override
@@ -40,27 +40,19 @@ class ExamRepositoryImpl implements ExamRepository {
   }
 
   @override
-  Future<void> delete(String id) async {
-    await _answersDao.clearByExam(id);
+  Future<void> deleteById(String id) async {
     await _examsDao.deleteById(id);
   }
 
   @override
-  Future<void> saveAnswer(ExamAnswer answer) =>
+  Future<List<ExamAnswer>> getAnswers(String examId) =>
+      _answersDao.getByExam(examId).then((rows) => rows.map(examAnswerFromRow).toList());
+
+  @override
+  Future<void> upsertAnswer(ExamAnswer answer) =>
       _answersDao.upsert(examAnswerToCompanion(answer));
 
   @override
-  Future<ExamAnswer?> getAnswer(String examId, String questionId) async {
-    final row = await _answersDao.get(examId, questionId);
-    return row == null ? null : examAnswerFromRow(row);
-  }
-
-  @override
-  Future<List<ExamAnswer>> getAnswers(String examId) async {
-    final rows = await _answersDao.getByExam(examId);
-    return rows.map(examAnswerFromRow).toList();
-  }
-
-  @override
-  Future<void> clearAnswers(String examId) => _answersDao.clearByExam(examId);
+  Future<void> clearAnswers(String examId) =>
+      _answersDao.clearByExam(examId);
 }
