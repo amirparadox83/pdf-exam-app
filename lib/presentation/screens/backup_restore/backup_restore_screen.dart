@@ -14,8 +14,8 @@ class BackupRestoreScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final createState = ref.watch(backupCreateProvider);
-    final backupsAsync = ref.watch(backupListProvider);
+    final BackupCreateState createState = ref.watch(backupCreateProvider);
+    final AsyncValue<List<BackupMetadata>> backupsAsync = ref.watch(backupListProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text('پشتیبان و بازیابی')),

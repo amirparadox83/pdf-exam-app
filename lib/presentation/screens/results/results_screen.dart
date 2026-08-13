@@ -23,7 +23,7 @@ class ResultsScreen extends ConsumerWidget {
         body: const Center(child: Text('شناسه نتیجه نامعتبر است')),
       );
     }
-    final resultAsync = ref.watch(resultByIdProvider(resultId!));
+    final AsyncValue<ExamResult?> resultAsync = ref.watch(resultByIdProvider(resultId!));
 
     return Scaffold(
       appBar: AppBar(
@@ -61,7 +61,7 @@ class ResultsScreen extends ConsumerWidget {
               ),
             );
           }
-          final percent = result.percentage.clamp(0, 100);
+          final percent = result.percentage.clamp(0.0, 100.0);
           final color = _scoreColor(percent);
           return SingleChildScrollView(
             padding: const EdgeInsets.all(20),
@@ -163,7 +163,7 @@ class ResultsScreen extends ConsumerWidget {
                 FilledButton.icon(
                   onPressed: () => context.push(AppRoutes.resultsReview
                       .replaceAll(':resultId', result.id)),
-                  icon: const Icon(Icons.review),
+                  icon: const Icon(Icons.rate_review),
                   label: const Text('بازبینی سؤالات'),
                 ),
                 const SizedBox(height: 12),

@@ -31,9 +31,9 @@ class _QuestionBankScreenState extends ConsumerState<QuestionBankScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final questionsAsync = ref.watch(questionBankQuestionsProvider);
-    final subjectsAsync = ref.watch(subjectsListProvider);
-    final filter = ref.watch(questionBankFilterProvider);
+    final AsyncValue<List<Question>> questionsAsync = ref.watch(questionBankQuestionsProvider);
+    final AsyncValue<List<Subject>> subjectsAsync = ref.watch(subjectsListProvider);
+    final QuestionBankFilter filter = ref.watch(questionBankFilterProvider);
 
     // Cache subjects locally for the dropdown
     subjectsAsync.whenData((s) {
@@ -241,7 +241,7 @@ class _QuestionBankScreenState extends ConsumerState<QuestionBankScreen> {
   }
 
   void _showFilterSheet(BuildContext context) {
-    final filter = ref.read(questionBankFilterProvider);
+    final QuestionBankFilter filter = ref.read(questionBankFilterProvider);
     showModalBottomSheet(
       context: context,
       builder: (sheetCtx) => StatefulBuilder(

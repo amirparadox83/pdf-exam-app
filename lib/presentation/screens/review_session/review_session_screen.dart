@@ -16,8 +16,8 @@ class ReviewSessionScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final dueAsync = ref.watch(dueReviewsProvider);
-    final breakdown = ref.watch(reviewStatusBreakdownProvider);
+    final AsyncValue<List<ReviewSchedule>> dueAsync = ref.watch(dueReviewsProvider);
+    final ReviewStatusBreakdown breakdown = ref.watch(reviewStatusBreakdownProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text('مرور امروز')),

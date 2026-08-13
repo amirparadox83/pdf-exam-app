@@ -16,9 +16,9 @@ class AnalyticsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final statsAsync = ref.watch(_overallStatsProvider);
-    final subjectsAsync = ref.watch(_subjectStatsProvider);
-    final trendAsync = ref.watch(_scoreTrendProvider);
+    final AsyncValue<OverallStats> statsAsync = ref.watch(_overallStatsProvider);
+    final AsyncValue<List<SubjectStats>> subjectsAsync = ref.watch(_subjectStatsProvider);
+    final AsyncValue<List<TimeTrendPoint>> trendAsync = ref.watch(_scoreTrendProvider);
 
     return DefaultTabController(
       length: 3,

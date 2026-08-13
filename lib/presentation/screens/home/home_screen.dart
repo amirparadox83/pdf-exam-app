@@ -16,7 +16,7 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final statsAsync = ref.watch(homeStatsProvider);
+    final AsyncValue<HomeStats> statsAsync = ref.watch(homeStatsProvider);
 
     return Scaffold(
       appBar: AppBar(

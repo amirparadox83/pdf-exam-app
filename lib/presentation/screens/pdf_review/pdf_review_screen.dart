@@ -25,7 +25,7 @@ class PdfReviewScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final PdfReviewSession session = ref.watch(pdfReviewSessionProvider);
-    final summary = ref.watch(pdfReviewSummaryProvider);
+    final PdfReviewSummary summary = ref.watch(pdfReviewSummaryProvider);
 
     return Scaffold(
       appBar: AppBar(

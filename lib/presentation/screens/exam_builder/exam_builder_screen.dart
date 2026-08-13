@@ -150,7 +150,7 @@ class _ExamBuilderScreenState extends ConsumerState<ExamBuilderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final subjectsAsync = ref.watch(subjectsListProvider);
+    final AsyncValue<List<Subject>> subjectsAsync = ref.watch(subjectsListProvider);
     return Scaffold(
       appBar: AppBar(title: const Text('ساخت آزمون')),
       body: SingleChildScrollView(

@@ -16,9 +16,9 @@ class MistakeNotebookScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final mistakesAsync = ref.watch(mistakeListProvider);
-    final summaryAsync = ref.watch(mistakeSummaryProvider);
-    final reasonFilter = ref.watch(mistakeReasonFilterProvider);
+    final AsyncValue<List<Mistake>> mistakesAsync = ref.watch(mistakeListProvider);
+    final AsyncValue<MistakeSummary> summaryAsync = ref.watch(mistakeSummaryProvider);
+    final MistakeReason? reasonFilter = ref.watch(mistakeReasonFilterProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -194,7 +194,7 @@ class MistakeNotebookScreen extends ConsumerWidget {
   }
 
   void _showFilterSheet(BuildContext context, WidgetRef ref) {
-    final current = ref.read(mistakeReasonFilterProvider);
+    final MistakeReason? current = ref.read(mistakeReasonFilterProvider);
     showModalBottomSheet(
       context: context,
       builder: (sheetCtx) => StatefulBuilder(

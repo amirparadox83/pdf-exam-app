@@ -26,7 +26,7 @@ class ExamPreparationScreen extends ConsumerWidget {
         body: const Center(child: Text('شناسه آزمون نامعتبر است')),
       );
     }
-    final examDataAsync = ref.watch(examByIdProvider(examId!));
+    final AsyncValue<({Exam exam, List<Question> questions})?> examDataAsync = ref.watch(examByIdProvider(examId!));
 
     return Scaffold(
       appBar: AppBar(title: const Text('آماده‌سازی آزمون')),
