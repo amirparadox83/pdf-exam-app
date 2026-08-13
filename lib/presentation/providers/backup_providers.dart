@@ -99,6 +99,6 @@ class BackupCreateNotifier extends StateNotifier<BackupCreateState> {
 }
 
 final backupCreateProvider =
-    StateNotifierProvider<BackupCreateNotifier, BackupCreateState>(
+    stateNotifierProvider<BackupCreateNotifier, BackupCreateState>(
   (ref) => BackupCreateNotifier(ref),
 );
