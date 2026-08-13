@@ -31,7 +31,7 @@ class MistakeRepositoryImpl implements MistakeRepository {
   }
 
   @override
-  Future<String> create(Mistake mistake) =>
+  Future<String> insert(Mistake mistake) =>
       _dao.insertOne(mistakeToCompanion(mistake, newRecord: true));
 
   @override
@@ -40,7 +40,16 @@ class MistakeRepositoryImpl implements MistakeRepository {
   }
 
   @override
-  Future<void> deleteById(String id) async {
+  Future<void> delete(String id) async {
     await _dao.deleteById(id);
+  }
+
+  @override
+  Future<void> markCorrectStreak(String questionId, bool correct) async {
+    final mistake = await _dao.getByQuestion(questionId);
+    if (mistake == null) return;
+    await _dao.updateOne(
+      MistakesCompanion(),
+    );
   }
 }
