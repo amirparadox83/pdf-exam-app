@@ -10,7 +10,7 @@ part 'entities.g.dart';
 // === Subject & Topic ===
 
 @freezed
-class Subject with _$Subject {
+sealed class Subject with _$Subject {
   const factory Subject({
     required String id,
     required String name,
@@ -24,7 +24,7 @@ class Subject with _$Subject {
 }
 
 @freezed
-class Topic with _$Topic {
+sealed class Topic with _$Topic {
   const factory Topic({
     required String id,
     required String subjectId,
@@ -40,7 +40,7 @@ class Topic with _$Topic {
 // === PDF Source ===
 
 @freezed
-class PdfSource with _$PdfSource {
+sealed class PdfSource with _$PdfSource {
   const factory PdfSource({
     required String id,
     required String originalFileName,
@@ -58,7 +58,7 @@ class PdfSource with _$PdfSource {
 }
 
 @freezed
-class PdfPage with _$PdfPage {
+sealed class PdfPage with _$PdfPage {
   const factory PdfPage({
     required String id,
     required String pdfId,
@@ -87,7 +87,7 @@ enum QuestionStatus {
 
 /// A question extracted from PDF or created by user
 @freezed
-class Question with _$Question {
+sealed class Question with _$Question {
   const factory Question({
     required String id,
     required String pdfId,
@@ -118,7 +118,7 @@ class Question with _$Question {
 }
 
 @freezed
-class QuestionOption with _$QuestionOption {
+sealed class QuestionOption with _$QuestionOption {
   const factory QuestionOption({
     required String id,
     required String label,    // e.g. "الف", "۱", "A"
@@ -132,7 +132,7 @@ class QuestionOption with _$QuestionOption {
 
 /// Bounding box for a region in the PDF page
 @freezed
-class PdfRegion with _$PdfRegion {
+sealed class PdfRegion with _$PdfRegion {
   const factory PdfRegion({
     required int pageNumber,
     required double x,
@@ -148,7 +148,7 @@ class PdfRegion with _$PdfRegion {
 // === Tags ===
 
 @freezed
-class Tag with _$Tag {
+sealed class Tag with _$Tag {
   const factory Tag({
     required String id,
     required String name,
@@ -173,7 +173,7 @@ enum ExamSelectionStrategy {
 }
 
 @freezed
-class Exam with _$Exam {
+sealed class Exam with _$Exam {
   const factory Exam({
     required String id,
     required String name,
@@ -200,7 +200,7 @@ class Exam with _$Exam {
 enum ExamStatus { draft, ready, inProgress, submitted, cancelled }
 
 @freezed
-class ExamAnswer with _$ExamAnswer {
+sealed class ExamAnswer with _$ExamAnswer {
   const factory ExamAnswer({
     required String examId,
     required String questionId,
@@ -216,7 +216,7 @@ class ExamAnswer with _$ExamAnswer {
 // === Result & Grading ===
 
 @freezed
-class ExamResult with _$ExamResult {
+sealed class ExamResult with _$ExamResult {
   const factory ExamResult({
     required String id,
     required String examId,
@@ -239,7 +239,7 @@ class ExamResult with _$ExamResult {
 }
 
 @freezed
-class ResultQuestion with _$ResultQuestion {
+sealed class ResultQuestion with _$ResultQuestion {
   const factory ResultQuestion({
     required String questionId,
     String? selectedOptionId,
@@ -266,7 +266,7 @@ enum MistakeReason {
 }
 
 @freezed
-class Mistake with _$Mistake {
+sealed class Mistake with _$Mistake {
   const factory Mistake({
     required String id,
     required String questionId,
@@ -288,7 +288,7 @@ class Mistake with _$Mistake {
 enum ReviewStatus { needsReview, learning, mastered, difficult }
 
 @freezed
-class ReviewSchedule with _$ReviewSchedule {
+sealed class ReviewSchedule with _$ReviewSchedule {
   const factory ReviewSchedule({
     required String id,
     required String questionId,
@@ -308,7 +308,7 @@ class ReviewSchedule with _$ReviewSchedule {
 // === Notes ===
 
 @freezed
-class Note with _$Note {
+sealed class Note with _$Note {
   const factory Note({
     required String id,
     required String questionId,
@@ -323,7 +323,7 @@ class Note with _$Note {
 // === Backup ===
 
 @freezed
-class BackupMetadata with _$BackupMetadata {
+sealed class BackupMetadata with _$BackupMetadata {
   const factory BackupMetadata({
     required String id,
     required String filePath,

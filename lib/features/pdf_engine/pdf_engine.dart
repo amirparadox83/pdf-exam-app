@@ -18,6 +18,7 @@
 /// (`PngEncoder`) to encode them to PNG.
 
 import 'dart:typed_data';
+import 'dart:ui' show Color;
 
 import 'package:image/image.dart' as img;
 import 'package:pdfrx/pdfrx.dart';
@@ -203,7 +204,7 @@ class _PdfrxHandle implements PdfDocumentHandle {
       fullHeight: page.height * scale,
       // Render with white background to match how PDFs look on paper.
       // Without this, transparent PDF backgrounds show as black in the PNG.
-      backgroundColor: 0xFFFFFFFF,
+      backgroundColor: const Color(0xFFFFFFFF),
     );
     if (pageImage == null) {
       throw StateError('pdfrx returned null for render(page=$pageNumber)');
