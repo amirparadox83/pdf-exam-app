@@ -8,7 +8,7 @@
 library presentation.providers.pdf_review_providers;
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_state_notifier/riverpod_state_notifier.dart';
+import 'state_notifier_compat.dart';
 
 import '../../features/question_parser/question_parser.dart';
 
