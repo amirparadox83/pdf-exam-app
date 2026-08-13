@@ -54,7 +54,7 @@ class QuestionBankFilter {
 }
 
 final questionBankFilterProvider =
-    StateNotifierProvider<QuestionBankFilterNotifier, QuestionBankFilter>(
+    stateNotifierProvider<QuestionBankFilterNotifier, QuestionBankFilter>(
   (ref) => QuestionBankFilterNotifier(),
 );
 
