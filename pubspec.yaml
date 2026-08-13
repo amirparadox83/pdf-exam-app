@@ -98,7 +98,7 @@ flutter:
     - assets/fonts/
     - assets/images/
     - assets/icons/
-    - test_fixtures/
+    # test_fixtures/ excluded — only needed for tests, not APK build
 
   fonts:
     - family: Vazirmatn
