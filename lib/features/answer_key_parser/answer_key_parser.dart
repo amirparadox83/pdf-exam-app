@@ -110,8 +110,8 @@ class RuleBasedAnswerKeyParser implements AnswerKeyParser {
 
   int _normalizeDigits(String s) {
     if (s.isEmpty) return -1;
-    final persian = s.replaceAll(RegExp(r'[\u06F0-\u06F9]'), (m) => String.fromCharCode(m.codeUnitAt(0) - 0x06F0 + 0x30));
-    final arabic = persian.replaceAll(RegExp(r'[\u0660-\u0669]'), (m) => String.fromCharCode(m.codeUnitAt(0) - 0x0660 + 0x30));
+    final persian = s.replaceAll(RegExp(r'[\u06F0-\u06F9]'), (m) => String.fromCharCode(m.group(0)!.codeUnitAt(0) - 0x06F0 + 0x30));
+    final arabic = persian.replaceAll(RegExp(r'[\u0660-\u0669]'), (m) => String.fromCharCode(m.group(0)!.codeUnitAt(0) - 0x0660 + 0x30));
     return int.tryParse(arabic) ?? -1;
   }
 
