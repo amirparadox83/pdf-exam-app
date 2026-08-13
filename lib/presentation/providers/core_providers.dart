@@ -4,14 +4,22 @@ library presentation.providers.core_providers;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'state_notifier_compat.dart';
 
 import '../../data/database/app_database.dart';
 import '../../data/file_storage/file_storage_service.dart';
 import '../../services/service_container.dart';
 
+/// Riverpod 3.x Notifier for theme mode.
+class ThemeModeNotifier extends Notifier<ThemeMode> {
+  @override
+  ThemeMode build() => ThemeMode.system;
+}
+
 /// Theme mode (system/light/dark)
-final themeModeProvider = stateProvider<ThemeMode>(() => ThemeMode.system);
+final themeModeProvider =
+    NotifierProvider<ThemeModeNotifier, ThemeMode>(
+  ThemeModeNotifier.new,
+);
 
 /// Database singleton
 final appDatabaseProvider = Provider<AppDatabase>((ref) {

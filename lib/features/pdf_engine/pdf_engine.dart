@@ -192,24 +192,18 @@ class _PdfrxHandle implements PdfDocumentHandle {
     }
     final page = _doc.pages[pageNumber - 1];
 
-    // pdfrx 1.0.x API: PdfPage.render returns Future<PdfPageImage?>.
-    // PdfPageImage has:
-    //   - width, height (pixel dimensions)
-    //   - pixels (Uint8List, RGBA format, length = width*height*4)
-    //   - format (PdfPageImageFormat.png | rgba)
-    //
-    // We request RGBA so we can re-encode to PNG with a known encoder.
-    // If pdfrx already returned PNG bytes (newer versions support this),
-    // we'd skip the encoding step. We don't rely on that — we always
-    // encode ourselves so the output is deterministic across pdfrx versions.
+    // pdfrx 1.0.x+ API: PdfPage.render uses fullWidth/fullHeight instead of scale.
+    // fullWidth/fullHeight specify the full rendering dimensions in points.
+    // We compute them from the page's intrinsic size * the desired scale factor.
+    // backgroundColor: 0xFFFFFFFF = white background, matching how PDFs look on paper.
     final pageImage = await page.render(
       // scale: 1.0 = 72 DPI. Multiply by (targetDpi / 72) for higher DPI.
       // For on-screen review, 1.0–2.0 is enough; for archival, 2.0–3.0.
-      scale: scale,
-      // Render with transparency disabled — white background — to match
-      // how PDFs look on paper. Without this, transparent PDF backgrounds
-      // show as black in the PNG.
-      backgroundFill: true,
+      fullWidth: page.width * scale,
+      fullHeight: page.height * scale,
+      // Render with white background to match how PDFs look on paper.
+      // Without this, transparent PDF backgrounds show as black in the PNG.
+      backgroundColor: 0xFFFFFFFF,
     );
     if (pageImage == null) {
       throw StateError('pdfrx returned null for render(page=$pageNumber)');

@@ -9,7 +9,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../providers/app_providers.dart';
 import '../../routing/app_routes.dart';
-import '../widgets/stat_card.dart';
+import '../../widgets/stat_card.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});

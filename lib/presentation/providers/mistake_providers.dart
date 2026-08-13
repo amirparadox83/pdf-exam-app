@@ -3,7 +3,6 @@
 library presentation.providers.mistake_providers;
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'state_notifier_compat.dart';
 
 import '../../domain/entities/entities.dart';
 import 'repository_providers.dart';
@@ -28,9 +27,17 @@ final mistakeListProvider = FutureProvider<List<Mistake>>(
   (ref) => ref.watch(mistakeRepositoryProvider).getAll(limit: 1000),
 );
 
+/// Riverpod 3.x Notifier for optional reason filter.
+class MistakeReasonFilterNotifier extends Notifier<MistakeReason?> {
+  @override
+  MistakeReason? build() => null;
+}
+
 /// Optional reason filter.
 final mistakeReasonFilterProvider =
-    stateProvider<MistakeReason?>(() => null);
+    NotifierProvider<MistakeReasonFilterNotifier, MistakeReason?>(
+  MistakeReasonFilterNotifier.new,
+);
 
 /// Filtered list (applies reason filter on top of `mistakeListProvider`).
 final filteredMistakeListProvider = Provider<List<Mistake>>((ref) {

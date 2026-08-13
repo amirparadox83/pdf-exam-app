@@ -13,6 +13,7 @@ import 'dart:io';
 import '../../providers/app_providers.dart';
 import '../../routing/app_routes.dart';
 import '../../../features/pdf_extraction/pdf_extractor.dart';
+import '../../../features/question_parser/question_parser.dart';
 import '../../../domain/entities/entities.dart';
 
 class ProcessingScreen extends ConsumerStatefulWidget {

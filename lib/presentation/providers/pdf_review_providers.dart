@@ -8,9 +8,9 @@
 library presentation.providers.pdf_review_providers;
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'state_notifier_compat.dart';
 
 import '../../features/question_parser/question_parser.dart';
+import '../../domain/entities/entities.dart';
 
 /// Holds the most recent batch of detected questions from the parser.
 class PdfReviewSession {
@@ -37,8 +37,10 @@ class PdfReviewSession {
   );
 }
 
-class PdfReviewSessionNotifier extends StateNotifier<PdfReviewSession> {
-  PdfReviewSessionNotifier() : super(PdfReviewSession.empty);
+/// Riverpod 3.x Notifier for PDF review session state.
+class PdfReviewSessionNotifier extends Notifier<PdfReviewSession> {
+  @override
+  PdfReviewSession build() => PdfReviewSession.empty;
 
   void set({
     required String pdfPath,
@@ -62,8 +64,8 @@ class PdfReviewSessionNotifier extends StateNotifier<PdfReviewSession> {
 }
 
 final pdfReviewSessionProvider =
-    stateNotifierProvider<PdfReviewSessionNotifier, PdfReviewSession>(
-  (ref) => PdfReviewSessionNotifier(),
+    NotifierProvider<PdfReviewSessionNotifier, PdfReviewSession>(
+  PdfReviewSessionNotifier.new,
 );
 
 /// Derived counts for the summary header.
@@ -82,11 +84,11 @@ final pdfReviewSummaryProvider = Provider<PdfReviewSummary>(
         case QuestionStatus.suspicious:
           suspicious++;
           break;
-        case QuestionStatus.invalid:
-          invalid++;
-          break;
         case QuestionStatus.needsReview:
           valid++;
+          break;
+        case QuestionStatus.invalid:
+          invalid++;
           break;
       }
       if (q.options.isEmpty) {

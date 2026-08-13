@@ -17,7 +17,7 @@ import '../../../domain/entities/entities.dart';
 import '../../../features/question_parser/question_parser.dart';
 import '../../providers/app_providers.dart';
 import '../../routing/app_routes.dart';
-import '../widgets/stat_card.dart';
+import '../../widgets/stat_card.dart';
 
 class PdfReviewScreen extends ConsumerWidget {
   const PdfReviewScreen({super.key});

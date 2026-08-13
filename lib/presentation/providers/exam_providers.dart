@@ -3,7 +3,6 @@
 library presentation.providers.exam_providers;
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'state_notifier_compat.dart';
 
 import '../../domain/entities/entities.dart';
 import 'core_providers.dart';
@@ -48,9 +47,10 @@ class ExamSession {
       );
 }
 
-class ExamSessionNotifier extends StateNotifier<ExamSession> {
-  final Ref ref;
-  ExamSessionNotifier(this.ref) : super(ExamSession.empty);
+/// Riverpod 3.x Notifier for exam session state.
+class ExamSessionNotifier extends Notifier<ExamSession> {
+  @override
+  ExamSession build() => ExamSession.empty;
 
   void set(Exam exam, List<Question> questions, Map<String, ExamAnswer> answers) {
     state = ExamSession(
@@ -73,8 +73,8 @@ class ExamSessionNotifier extends StateNotifier<ExamSession> {
 }
 
 final examSessionProvider =
-    stateNotifierProvider<ExamSessionNotifier, ExamSession>(
-  (ref) => ExamSessionNotifier(ref),
+    NotifierProvider<ExamSessionNotifier, ExamSession>(
+  ExamSessionNotifier.new,
 );
 
 /// Load an exam (and its questions) by ID — used by ExamPreparationScreen.

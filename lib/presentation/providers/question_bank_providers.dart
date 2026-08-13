@@ -3,7 +3,6 @@
 library presentation.providers.question_bank_providers;
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'state_notifier_compat.dart';
 
 import '../../domain/entities/entities.dart';
 import 'repository_providers.dart';
@@ -53,13 +52,10 @@ class QuestionBankFilter {
   }
 }
 
-final questionBankFilterProvider =
-    stateNotifierProvider<QuestionBankFilterNotifier, QuestionBankFilter>(
-  (ref) => QuestionBankFilterNotifier(),
-);
-
-class QuestionBankFilterNotifier extends StateNotifier<QuestionBankFilter> {
-  QuestionBankFilterNotifier() : super(const QuestionBankFilter());
+/// Riverpod 3.x Notifier for question bank filter state.
+class QuestionBankFilterNotifier extends Notifier<QuestionBankFilter> {
+  @override
+  QuestionBankFilter build() => const QuestionBankFilter();
 
   void setSearch(String? q) => state = state.copyWith(searchQuery: q);
   void clearSearch() => state = state.copyWith(clearSearch: true);
@@ -73,6 +69,11 @@ class QuestionBankFilterNotifier extends StateNotifier<QuestionBankFilter> {
       state = state.copyWith(onlyNeedsReview: !state.onlyNeedsReview);
   void reset() => state = const QuestionBankFilter();
 }
+
+final questionBankFilterProvider =
+    NotifierProvider<QuestionBankFilterNotifier, QuestionBankFilter>(
+  QuestionBankFilterNotifier.new,
+);
 
 /// Async list of filtered questions.
 final questionBankQuestionsProvider =

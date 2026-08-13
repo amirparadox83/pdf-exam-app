@@ -9,6 +9,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../providers/app_providers.dart';
 import '../../routing/app_routes.dart';
+import '../../widgets/stat_card.dart';
 import '../../../domain/entities/entities.dart';
 
 class MistakeNotebookScreen extends ConsumerWidget {

@@ -3,7 +3,6 @@
 library presentation.providers.backup_providers;
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'state_notifier_compat.dart';
 
 import '../../domain/entities/entities.dart';
 import 'repository_providers.dart';
@@ -53,9 +52,10 @@ class BackupCreateState {
   }
 }
 
-class BackupCreateNotifier extends StateNotifier<BackupCreateState> {
-  final Ref ref;
-  BackupCreateNotifier(this.ref) : super(const BackupCreateState());
+/// Riverpod 3.x Notifier for backup creation state.
+class BackupCreateNotifier extends Notifier<BackupCreateState> {
+  @override
+  BackupCreateState build() => const BackupCreateState();
 
   void setIncludePdfs(bool v) => state = state.copyWith(includePdfs: v);
   void setEncrypt(bool v) => state = state.copyWith(encrypt: v);
@@ -99,6 +99,6 @@ class BackupCreateNotifier extends StateNotifier<BackupCreateState> {
 }
 
 final backupCreateProvider =
-    stateNotifierProvider<BackupCreateNotifier, BackupCreateState>(
-  (ref) => BackupCreateNotifier(ref),
+    NotifierProvider<BackupCreateNotifier, BackupCreateState>(
+  BackupCreateNotifier.new,
 );
