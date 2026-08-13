@@ -35,16 +35,16 @@ android {
             // For MVP: sign with debug key so the APK is installable out-of-the-box.
             // For production, replace with a real keystore (see BUILD_APK.md).
             signingConfig = signingConfigs.getByName("debug")
-            minifyEnabled = true
-            shrinkResources = true
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
         debug {
-            minifyEnabled = false
-            shrinkResources = false
+            isMinifyEnabled = false
+            isShrinkResources = false
         }
     }
 
