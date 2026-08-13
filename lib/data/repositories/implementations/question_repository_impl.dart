@@ -16,7 +16,7 @@ import '../../../domain/repositories/repositories.dart';
 import 'mappers.dart';
 
 class QuestionRepositoryImpl implements QuestionRepository {
-  final AppDatabase database;
+  final db.AppDatabase database;
   late final QuestionsDao _dao;
   late final QuestionOptionsDao _optionsDao;
   late final TagsDao _tagsDao;
