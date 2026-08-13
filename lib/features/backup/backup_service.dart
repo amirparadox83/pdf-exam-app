@@ -216,13 +216,13 @@ class BackupServiceImpl implements BackupService {
 
     // 4. Build archive.
     final archive = Archive();
-    archive.addFile(ArchiveFile.bytes(
+    archive.addFile(ArchiveFile(
       'manifest.json',
       utf8.encode(jsonEncode(manifest)),
     ));
     for (final entry in dataMap.entries) {
       if (_cancelled) throw StateError('Backup cancelled');
-      archive.addFile(ArchiveFile.bytes(
+      archive.addFile(ArchiveFile(
         'data/${entry.key}.json',
         utf8.encode(jsonEncode(entry.value)),
       ));
@@ -234,7 +234,7 @@ class BackupServiceImpl implements BackupService {
         if (_cancelled) throw StateError('Backup cancelled');
         try {
           final bytes = await fileStorage.read(pdf.storedFilePath);
-          archive.addFile(ArchiveFile.bytes('pdfs/${pdf.id}.pdf', bytes));
+          archive.addFile(ArchiveFile('pdfs/${pdf.id}.pdf', bytes));
         } catch (_) {
           // Skip missing PDFs — they may have been cleaned up by the user.
         }
