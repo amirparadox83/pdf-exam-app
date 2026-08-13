@@ -21,7 +21,7 @@ dependencies:
   go_router: ^14.2.7
 
   # Database (SQLite ORM)
-  drift: ^2.20.0
+  drift: ^2.34.0
   sqlite3_flutter_libs: ^0.5.24
   path_provider: ^2.1.4
   path: ^1.9.0
@@ -78,7 +78,7 @@ dev_dependencies:
   flutter_lints: ^4.0.0
 
   build_runner: ^2.4.13
-  drift_dev: ^2.20.0
+  drift_dev: ^2.34.0
   riverpod_generator: ^2.4.3
   freezed: ^2.5.7
   json_serializable: ^6.8.0
