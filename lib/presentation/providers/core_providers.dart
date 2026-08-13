@@ -11,7 +11,7 @@ import '../../data/file_storage/file_storage_service.dart';
 import '../../services/service_container.dart';
 
 /// Theme mode (system/light/dark)
-final themeModeProvider = stateProvider<ThemeMode>((ref) => ThemeMode.system);
+final themeModeProvider = stateProvider<ThemeMode>(() => ThemeMode.system);
 
 /// Database singleton
 final appDatabaseProvider = Provider<AppDatabase>((ref) {
