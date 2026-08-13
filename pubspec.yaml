@@ -89,7 +89,7 @@ dev_dependencies:
   path_provider_platform_interface: ^2.1.2
 
   # Test-only — for building synthetic PDFs in the PDF Engine integration test.
-  pdf: ^3.13.0
+  # pdf: ^3.13.0  # removed — causes dependency conflict (requires archive ^4.x, conflicts with our ^3.6.1)
 
 flutter:
   uses-material-design: true
