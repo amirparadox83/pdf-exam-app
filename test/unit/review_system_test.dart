@@ -7,7 +7,7 @@
 // and is forbidden to modify per project constraint. We test the persistence
 // layer around it.
 import 'package:flutter_test/flutter_test.dart';
-import 'package:persian_pdf_exam/data/database/app_database.dart';
+import 'package:persian_pdf_exam/data/database/app_database.dart' as db;
 import 'package:persian_pdf_exam/data/repositories/implementations/implementations.dart';
 import 'package:persian_pdf_exam/domain/entities/entities.dart';
 import 'package:persian_pdf_exam/features/review_system/review_scheduler.dart';
@@ -15,7 +15,7 @@ import 'package:persian_pdf_exam/features/review_system/review_scheduler.dart';
 import 'repositories/helpers.dart';
 
 void main() {
-  late AppDatabase db;
+  late db.AppDatabase db;
   late Sm2ReviewScheduler scheduler;
   late ReviewRepositoryImpl reviewRepo;
   late QuestionRepositoryImpl questionRepo;
