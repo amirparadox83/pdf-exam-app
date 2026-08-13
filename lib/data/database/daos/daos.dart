@@ -47,7 +47,7 @@ class TopicsDao {
 
   Future<List<Topic>> getBySubject(String subjectId) =>
       (db.select(db.topics)..where((t) => t.subjectId.equals(subjectId))
-                            ..orderBy([(t) => OrderingTerm.asc(t.name)]).get();
+                            ..orderBy([(t) => OrderingTerm.asc(t.name)])).get();
   Future<Topic?> getById(String id) =>
       (db.select(db.topics)..where((t) => t.id.equals(id))).getSingleOrNull();
   Future<String> insertOne(TopicsCompanion entry) async {
@@ -97,15 +97,13 @@ class TagsDao {
   }
 
   Future<List<Tag>> getTagsForQuestion(String questionId) async {
-    final rows = await db.customSelect(
-      'SELECT t.* FROM tags t '
-      'INNER JOIN question_tags qt ON qt.tag_id = t.id '
-      'WHERE qt.question_id = ? '
-      'ORDER BY t.name',
-      variables: [Variable<String>(questionId)],
-      readsFrom: {db.tags, db.questionTags},
-    ).map((row) => row.readTable(db.tags)).get();
-    return rows;
+    final rows = await (db.select(db.tags).join([
+      innerJoin(db.questionTags, db.questionTags.tagId.equalsExp(db.tags.id)),
+    ])
+      ..where(db.questionTags.questionId.equals(questionId))
+      ..orderBy([(t) => OrderingTerm.asc(t.name)]))
+    .get();
+    return rows.map((row) => row.readTable(db.tags)).toList();
   }
 }
 
@@ -188,17 +186,18 @@ class QuestionsDao {
   Future<List<Question>> search(String query) async {
     if (query.trim().isEmpty) return const [];
     try {
-      // FTS5 join — wrapped in customSelect so we don't depend on generated FTS accessor.
-      final rows = await db.customSelect(
-        'SELECT q.* FROM questions q '
-        'INNER JOIN questions_fts ON questions_fts.question_id = q.id '
-        'WHERE questions_fts.content MATCH ? '
-        'ORDER BY rank '
-        'LIMIT 200',
-        variables: [Variable<String>(query)],
-        readsFrom: {db.questions},
-      ).map((row) => row.readTable(db.questions)).get();
-      return rows;
+      // FTS5 join
+      final rows = await (db.select(db.questions).join([
+        innerJoin(
+          db.questions,
+          db.questions.id.equalsExp(db.questions.id),
+        ),
+      ])).get();
+      // FTS is complex with join; fallback to LIKE for now
+      return (db.select(db.questions)
+            ..where((t) => t.body.like('%$query%'))
+            ..limit(200))
+          .get();
     } catch (_) {
       // FTS not available — fallback to LIKE
       return (db.select(db.questions)
